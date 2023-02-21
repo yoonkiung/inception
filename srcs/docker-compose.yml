@@ -1,8 +1,5 @@
 version: '3'
 
-volumes:
-    data: {}
-
 services:
     nginx:
         build:
@@ -15,19 +12,28 @@ services:
         ports:
             - "443:443"
         restart: "always"
+        volumes:
+            - wordpress:/var/www/html
         networks:
             - gaepo
-    # wordpress:
-    #     build:
-    #         context: ./requirements/wordpress
-    #         dockerfile: ./Dockerfile
-    #     container_name: wordpress
-    #     volumes:
-    #         - data:/var/www/html
-    #     restart: always
-    #     networks:
-    #         - gaepo
+    wordpress:
+        build:
+            context: ./requirements/wordpress
+            dockerfile: ./Dockerfile
+        container_name: wordpress
+        image: wordpress
+        volumes:
+            - data:/var/www/html
+        restart: always
+        volumes:
+            - wordpress:/var/www/html
+        networks:
+            - gaepo
 
 networks:
     gaepo:
         driver: bridge
+
+volumes:
+    wordpress: {}
+    
