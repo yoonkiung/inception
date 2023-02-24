@@ -12,6 +12,7 @@ RUN apt-get update -y && \
     rm -rf /etc/nginx/conf.d/default.conf
 
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+# COPY ./phpinfo.php /var/www/html/phpinfo.php
 
 ENTRYPOINT nginx -g 'daemon off;'
 

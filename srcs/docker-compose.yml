@@ -1,5 +1,13 @@
 version: '3'
 
+volumes:
+    vol_wordpress:
+        driver: local
+        driver_opts:
+            type: volume
+            device: /Users/kiyoon/goinfre/inception/srcs/requirements/tools
+            o: bind
+
 services:
     nginx:
         build:
@@ -13,7 +21,7 @@ services:
             - "443:443"
         restart: "always"
         volumes:
-            - wordpress:/var/www/html
+            - vol_wordpress:/var/www/html
         networks:
             - gaepo
     wordpress:
@@ -22,18 +30,12 @@ services:
             dockerfile: ./Dockerfile
         container_name: wordpress
         image: wordpress
-        volumes:
-            - data:/var/www/html
         restart: always
         volumes:
-            - wordpress:/var/www/html
+            - vol_wordpress:/var/www/html
         networks:
             - gaepo
 
 networks:
     gaepo:
         driver: bridge
-
-volumes:
-    wordpress: {}
-    

@@ -14,8 +14,10 @@ RUN apt-get update && \
 #     chown -R www-data:www-data /var/www/html/
 
 # Configure php-fpm
+
+RUN mkdir -p /var/www/html
 COPY ./conf /etc/php/7.3/fpm/
-COPY ./phpinfo.php /usr/share/nginx/html/phpinfo.php
+
 RUN mkdir /run/php
 
 EXPOSE 9000
