@@ -11,7 +11,7 @@ RUN apt-get update -y && \
     mv server.csr server.key /etc/ssl/private && \
     rm -rf /etc/nginx/conf.d/default.conf
 
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx.conf /etc/nginx/sites-available/default
 
 ENTRYPOINT nginx -g 'daemon off;'
 

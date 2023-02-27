@@ -1,13 +1,18 @@
 version: '3'
 
 volumes:
-    vol_wordpress:
+    vol_wordpress: 
         driver: local
         driver_opts:
             type: volume
-            device: ./requirements/tools/
+            device: ./requirements/tools/wordpress
             o: bind
     vol_mariadb:
+        driver: local
+        driver_opts:
+            type: volume
+            device: ./requirements/tools/mariadb
+            o: bind
 
 services:
     nginx:
@@ -31,12 +36,15 @@ services:
             dockerfile: ./Dockerfile
         container_name: wordpress
         image: wordpress
+        # depends_on:
+        #     - mariadb
         restart: always
-        # environment:
-        #     WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
-        #     WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
-        #     WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
-        #     WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+        environment:
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_ROOT: ${MYSQL_ROOT}
         volumes:
             - vol_wordpress:/var/www/html/
         expose:
