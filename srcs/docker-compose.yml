@@ -5,7 +5,6 @@ volumes:
     
     vol_mariadb:
 
-
 services:
     nginx:
         build:
@@ -31,11 +30,19 @@ services:
         depends_on:
             - mariadb
         restart: always
-        # environment:
-        #     MYSQL_DATABASE: ${MYSQL_DATABASE}
-        #     MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-        #     MYSQL_USER: ${MYSQL_USER}
-        #     MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+        environment:
+            WORDPRESS_LOCAL: ${WORDPRESS_LOCAL}
+            WORDPRESS_URL: ${WORDPRESS_URL}
+            WORDPRESS_TITLE: ${WORDPRESS_TITLE}
+            WORDPRESS_ADMIN: ${WORDPRESS_ADMIN}
+            WORDPRESS_ADMIN_PASSWORD: ${WORDPRESS_ADMIN_PASSWORD}
+            WORDPRESS_ADMIN_EMAIL: ${WORDPRESS_ADMIN_EMAIL}
+            WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+            WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+            WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+            WORDPRESS_USER_NAME: ${WORDPRESS_USER_NAME}
+            WORDPRESS_USER_EMAIL: ${WORDPRESS_USER_EMAIL}
+            WORDPRESS_USER_PASSWORD: ${WORDPRESS_USER_PASSWORD}
         volumes:
             - vol_wordpress:/var/www/html/
         expose:
@@ -57,6 +64,8 @@ services:
             MYSQL_ROOT: ${MYSQL_ROOT}
         volumes:
             - vol_mariadb:/var/lib/mysql
+        expose:
+            - "3306"
         networks:
             - gaepo
 
