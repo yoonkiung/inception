@@ -6,16 +6,16 @@ all : $(NAME)
 
 $(NAME) :	
 	@sudo echo $(DOMAIN) > /etc/hosts
-	@docker-compose up -f ./src/docker-compose.yml -d --build
+	@sudo docker-compose -f ./srcs/docker-compose.yml up -d --build
 
 up:
-	@docker-compose up -f ./src/docker-compose.yml -d --build
+	@sudo docker-compose -f ./srcs/docker-compose.yml up -d --build
 
 down:
-	@docker-compose down -f ./src/docker-compose.yml 
+	@sudo docker-compose -f ./srcs/docker-compose.yml down 
 
 clean:
-	@docker-compose down -v -f ./src/docker-compose.yml
+	@sudo docker-compose -f ./srcs/docker-compose.yml down -v
 
 re: clean all
 
