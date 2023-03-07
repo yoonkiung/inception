@@ -17,6 +17,8 @@ services:
         ports:
             - "443:443"
         restart: "always"
+        environment:
+            CERTS_ : ${CERTS_}
         volumes:
             - vol_wordpress:/var/www/html/
         networks:
