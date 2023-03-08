@@ -9,13 +9,13 @@ $(NAME) :
 	@sudo docker-compose -f ./srcs/docker-compose.yml up -d --build
 
 up:
-	@sudo docker-compose -f ./srcs/docker-compose.yml up -d --build
+	@sudo docker-compose -f ./srcs/docker-compose.yml up -d
 
 down:
 	@sudo docker-compose -f ./srcs/docker-compose.yml down 
 
 clean:
-	@sudo docker-compose -f ./srcs/docker-compose.yml down -v
+	@sudo docker-compose -f ./srcs/docker-compose.yml down --rmi all -v
 
 re: clean all
 
