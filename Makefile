@@ -5,16 +5,17 @@ DOMAIN = "127.0.0.1       kiyoon.42.fr"
 all : $(NAME)
 
 $(NAME) :
-	@docker-compose -f ./srcs/docker-compose.yml up -d --build
+	@sudo echo "${DOMAIN}" > /etc/hosts
+	@sudo docker-compose -f ./srcs/docker-compose.yml up -d --build
 
 up:
-	@docker-compose -f ./srcs/docker-compose.yml up -d --build
+	@sudo docker-compose -f ./srcs/docker-compose.yml up -d --build
 
 down:
-	@docker-compose -f ./srcs/docker-compose.yml down 
+	@sudo docker-compose -f ./srcs/docker-compose.yml down 
 
 clean:
-	@docker-compose -f ./srcs/docker-compose.yml down -v
+	@sudo docker-compose -f ./srcs/docker-compose.yml down -v
 
 re: clean all
 
