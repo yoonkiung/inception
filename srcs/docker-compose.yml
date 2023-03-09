@@ -2,8 +2,15 @@ version: '3'
 
 volumes:
     vol_wordpress:
-    
+        driver_opts:
+            type: none
+            device: /home/kiyoon/data/wordpress
+            o: bind
     vol_mariadb:
+        driver_opts:
+            type: none
+            device: /home/kiyoon/data/mariadb
+            o: bind
 
 services:
     nginx:
